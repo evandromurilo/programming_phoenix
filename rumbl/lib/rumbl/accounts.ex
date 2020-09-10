@@ -41,4 +41,10 @@ defmodule Rumbl.Accounts do
     |> User.registration_changeset(attrs)
     |> Repo.insert()
   end
+
+  def update_user(%User{} = user, attrs \\ %{}) do
+    user
+    |> User.edit_profile_changeset(attrs)
+    |> Repo.update()
+  end
 end

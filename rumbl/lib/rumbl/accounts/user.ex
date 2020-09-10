@@ -27,6 +27,15 @@ defmodule Rumbl.Accounts.User do
     |> put_pass_hash()
   end
 
+  # the user may update the profile without a password
+  def edit_profile_changeset(user, attrs) do
+    user
+    |> base_changeset(attrs)
+    |> cast(attrs, [:password])
+    |> validate_length(:password, min: 6, max: 100)
+    |> put_pass_hash()
+  end
+
   defp put_pass_hash(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
