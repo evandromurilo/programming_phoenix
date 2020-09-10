@@ -18,17 +18,27 @@ defmodule Rumbl.Accounts do
     Repo.get!(User, id)
   end
 
-  def get_user_by(params) do
-    Repo.get_by(User, params)
+  def get_user_by(attrs) do
+    Repo.get_by(User, attrs)
   end
 
   def change_user(%User{} = user) do
-    User.changeset(user, %{})
+    User.base_changeset(user, %{})
   end
 
   def create_user(attrs \\ %{}) do
     %User{}
-    |> User.changeset(attrs)
+    |> User.base_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def change_registration(%User{} = user) do
+    User.registration_changeset(user, %{})
+  end
+
+  def register_user(attrs \\ %{}) do
+    %User{}
+    |> User.registration_changeset(attrs)
     |> Repo.insert()
   end
 end
