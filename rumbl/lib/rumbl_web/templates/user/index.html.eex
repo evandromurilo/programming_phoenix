@@ -8,4 +8,6 @@
     </tr>
   <% end %>
 </table>
+
+<%= link("Join us", to: "/users/new") %>
       
