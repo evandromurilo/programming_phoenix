@@ -1,3 +1,1 @@
 <b><%= first_name(@user) %></b> (<%= @user.id %>)
-
-<%= link("Edit profile", to: "/users/#{@user.id}/edit") %>

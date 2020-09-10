@@ -1,2 +1,4 @@
 <h1>Showing user</h1>
 <%= render "user.html", user: @user %>
+
+<%= link("Edit profile", to: Routes.user_path(@conn, :edit, @user.id)) %>

@@ -9,5 +9,5 @@
   <% end %>
 </table>
 
-<%= link("Join us", to: "/users/new") %>
+<%= link("Join us", to: Routes.user_path(@conn, :new)) %>
       
