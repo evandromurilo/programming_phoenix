@@ -47,4 +47,23 @@ defmodule Rumbl.Accounts do
     |> User.edit_profile_changeset(attrs)
     |> Repo.update()
   end
+
+  def authenticate_by_username_and_pass(username, given_pass) do
+    get_user_by(username: username)
+    |> authenticate_by_user_and_pass(given_pass)
+  end
+
+  def authenticate_by_user_and_pass(nil, _given_pass) do
+    Pbkdf2.no_user_verify()
+    {:error, :not_found}
+  end
+
+  def authenticate_by_user_and_pass(%User{} = user, given_pass) do
+    case Pbkdf2.verify_pass(given_pass, user.password_hash) do
+      true ->
+        {:ok, user}
+      false ->
+        {:error, :unauthorized}
+    end
+  end
 end
