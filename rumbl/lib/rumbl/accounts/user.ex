@@ -27,6 +27,12 @@ defmodule Rumbl.Accounts.User do
     |> put_pass_hash()
   end
 
+  def login_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:username, :password])
+    |> validate_required([:username, :password])
+  end
+
   # the user may update the profile without a password
   def edit_profile_changeset(user, attrs) do
     user

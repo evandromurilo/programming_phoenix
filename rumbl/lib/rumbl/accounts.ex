@@ -36,6 +36,10 @@ defmodule Rumbl.Accounts do
     User.registration_changeset(user, %{})
   end
 
+  def change_login(%User{} = user, attrs \\ %{}) do
+    User.login_changeset(user, attrs)
+  end
+
   def register_user(attrs \\ %{}) do
     %User{}
     |> User.registration_changeset(attrs)
