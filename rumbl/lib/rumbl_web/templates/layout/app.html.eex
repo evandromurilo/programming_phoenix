@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-      <section class="container" style="padding: 10px;">
+      <section class="container" style="padding: 10px; display: flex; justify-content: space-between;">
         <a href="/" style="display: flex; align-items: center;">
           <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>"
                height="70px"
@@ -19,6 +19,18 @@
 
           <span style="font-size: 20px">Rumbl</span>
         </a>
+
+        <%= if @current_user do %>
+          <span style="width: 180px; display: flex; align-items: center; justify-content: space-between;">
+            <span> <%= @current_user.username %> </span>
+            <%= link "Log out", to: Routes.session_path(@conn, :delete, @current_user), method: "delete" %>
+          </span>
+        <% else %>
+          <span style="width: 140px; display: flex; align-items: center; justify-content: space-between;">
+            <%= link "Log in", to: Routes.session_path(@conn, :new) %>
+            <%= link "Register", to: Routes.user_path(@conn, :new) %>
+          </span>
+        <% end %>
       </section>
     </header>
     <main role="main" class="container">

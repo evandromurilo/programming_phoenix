@@ -8,6 +8,4 @@
     </tr>
   <% end %>
 </table>
-
-<%= link("Join us", to: Routes.user_path(@conn, :new)) %>
       
