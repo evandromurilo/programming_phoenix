@@ -17,8 +17,6 @@ defmodule RumblWeb.Auth do
   end
 
   def logout(conn) do
-    conn
-    |> assign(:current_user, nil)
-    |> put_session(:user_id, nil)
+    configure_session(conn, drop: true)
   end
 end
